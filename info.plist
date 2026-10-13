@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>local.jerry.ghosttyfinder</string>
+	<key>connections</key>
+	<dict>
+		<key>D1A72E40-8C11-4F3A-9B01-1E5F2A3C4D01</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D1A72E40-8C11-4F3A-9B01-1E5F2A3C4D02</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D1A72E40-8C11-4F3A-9B01-1E5F2A3C4D03</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D1A72E40-8C11-4F3A-9B01-1E5F2A3C4D04</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Jerry</string>
+	<key>description</key>
+	<string>Open current Finder window in Ghostty and vice versa</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>GhosttyFinder</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>fg</string>
+				<key>subtext</key>
+				<string>Open current Finder directory in Ghostty</string>
+				<key>text</key>
+				<string>Finder → Ghostty</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D1A72E40-8C11-4F3A-9B01-1E5F2A3C4D01</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+  tell application "Finder"
+    if (count of Finder windows) &gt; 0 then
+      set dirPath to POSIX path of (folder of the front window as alias)
+    else
+      set dirPath to POSIX path of (desktop as alias)
+    end if
+  end tell
+
+  tell application "Ghostty"
+    activate
+    set cfg to new surface configuration
+    set initial working directory of cfg to dirPath
+    if (count of windows) &gt; 0 then
+      new tab in front window with configuration cfg
+    else
+      new window with configuration cfg
+    end if
+  end tell
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>D1A72E40-8C11-4F3A-9B01-1E5F2A3C4D02</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>gf</string>
+				<key>subtext</key>
+				<string>Open current Ghostty directory in Finder</string>
+				<key>text</key>
+				<string>Ghostty → Finder</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D1A72E40-8C11-4F3A-9B01-1E5F2A3C4D03</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+  tell application "Ghostty"
+    set dirPath to working directory of focused terminal of selected tab of front window
+  end tell
+
+  if dirPath is not "" then
+    do shell script "open -a Finder " &amp; quoted form of dirPath
+  end if
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>D1A72E40-8C11-4F3A-9B01-1E5F2A3C4D04</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>D1A72E40-8C11-4F3A-9B01-1E5F2A3C4D01</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<real>50</real>
+		</dict>
+		<key>D1A72E40-8C11-4F3A-9B01-1E5F2A3C4D02</key>
+		<dict>
+			<key>xpos</key>
+			<integer>500</integer>
+			<key>ypos</key>
+			<real>50</real>
+		</dict>
+		<key>D1A72E40-8C11-4F3A-9B01-1E5F2A3C4D03</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<real>190</real>
+		</dict>
+		<key>D1A72E40-8C11-4F3A-9B01-1E5F2A3C4D04</key>
+		<dict>
+			<key>xpos</key>
+			<integer>500</integer>
+			<key>ypos</key>
+			<real>190</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
