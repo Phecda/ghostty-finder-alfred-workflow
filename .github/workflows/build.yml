@@ -6,9 +6,17 @@ on:
       - main
     tags:
       - "v*"
+    paths-ignore:
+      - "README.md"
+      - "LICENSE*"
+      - ".gitignore"
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - "README.md"
+      - "LICENSE*"
+      - ".gitignore"
   workflow_dispatch:
 
 permissions:
