@@ -15,4 +15,4 @@ An Alfred workflow to seamlessly jump between Finder and Ghostty.
 
 ## Installation
 
-Download `GhosttyFinder.alfredworkflow` from this repository and double-click to install into Alfred.
+Download `GhosttyFinder.alfredworkflow` from [GitHub Releases](https://github.com/Phecda/ghostty-finder-alfred-workflow/releases) (or the latest GitHub Actions run artifacts) and double-click to install into Alfred.
